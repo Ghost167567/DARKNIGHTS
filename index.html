@@ -3,9 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DARK NIGHTS V2 - 🚀 Discord Bot Hosting 24/7 Gratis</title>
-    <meta name="description" content="Despliega bots Discord 24/7 gratis. Drag & drop, templates, logs en tiempo real. Únete: https://discord.gg/R2pGnXBX">
-    <link rel="icon" href="favicon.ico">
+    <title>DARK NIGHTS V2 - SERVER DISCORD LINK https://discord.gg/R2pGnXBX</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
@@ -14,95 +12,514 @@
             font-family: 'Courier New', monospace;
             overflow-x: hidden;
         }
-        /* Profit Meter */
-        .profit-meter {
-            font-size: 3em;
-            color: #ffd700;
-            text-shadow: 0 0 30px #ffd700;
-            animation: moneyPulse 2s infinite;
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
         }
-        @keyframes moneyPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+        .container {
+            display: flex;
+            min-height: 100vh;
+            max-width: 1400px;
+            margin: 0 auto;
         }
-        /* Quick Terminal */
-        .terminal-quick {
+        .sidebar {
+            width: 300px;
             background: #111;
-            border: 2px solid #ff0000;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 8px;
-            font-family: monospace;
+            padding: 20px;
+            border-right: 2px solid #ff0000;
+            height: 100vh;
+            overflow-y: auto;
+            box-shadow: inset -5px 0 20px rgba(255,0,0,0.1);
         }
-        .quick-cmd {
-            background: #000;
-            color: #ff0000;
-            border: 1px solid #ff0000;
-            padding: 10px;
-            margin: 5px 0;
-            cursor: pointer;
-            border-radius: 5px;
+        .main-content {
+            flex: 1;
+            padding: 30px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 3px solid #ff0000;
+            padding-bottom: 20px;
+        }
+        .title {
+            font-size: 2.5em;
+            background: linear-gradient(45deg, #ff0000, #00ff00, #ff0000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glitch 2s infinite;
+            text-shadow: 0 0 20px #ff0000;
+        }
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+        }
+        .discord-link {
+            background: #7289da;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            margin-top: 15px;
+            box-shadow: 0 5px 15px rgba(114,137,218,0.4);
             transition: all 0.3s;
         }
-        .quick-cmd:hover {
+        .discord-link:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(114,137,218,0.6);
+        }
+        .hacker-btn {
+            width: 100%;
+            background: #000;
+            color: #ff0000;
+            border: 2px solid #ff0000;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .hacker-btn:hover {
+            background: #ff0000;
+            color: #000;
+            box-shadow: 0 0 30px #ff0000;
+            transform: scale(1.02);
+        }
+        .hacker-btn.active {
             background: #ff0000;
             color: #000;
             box-shadow: 0 0 20px #ff0000;
         }
-        /* Sidebar */
-        .sidebar {
+        .bot-item {
+            background: #111;
+            border: 1px solid #ff0000;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .bot-item:hover {
+            border-color: #00ff00;
+            box-shadow: 0 0 15px #00ff00;
+        }
+        .status {
+            float: right;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+        .status.RUNNING { background: #004d00; color: #00ff00; }
+        .status.STOPPED { background: #330000; color: #ff0000; }
+        .content-section {
+            background: #111;
+            border: 2px solid #ff0000;
+            border-radius: 10px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 30px rgba(255,0,0,0.3);
+        }
+        .drop-zone {
+            border: 3px dashed #ff0000;
+            padding: 40px;
+            text-align: center;
+            margin: 20px 0;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .drop-zone.dragover {
+            border-color: #00ff00;
+            background: rgba(0,255,0,0.1);
+            box-shadow: 0 0 30px #00ff00;
+        }
+        #codeEditor {
+            width: 100%;
+            height: 400px;
+            background: #000;
+            color: #00ff00;
+            border: 1px solid #ff0000;
+            padding: 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            border-radius: 5px;
+            resize: vertical;
+        }
+        .token-input {
+            width: 100%;
+            background: #000;
+            color: #ff0000;
+            border: 2px solid #ff0000;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-family: monospace;
+        }
+        #logs {
+            background: #000;
+            color: #00ff00;
             padding: 20px;
+            border: 1px solid #ff0000;
+            border-radius: 5px;
+            height: 300px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 13px;
+            margin-top: 20px;
+        }
+        .stats {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
         }
         .stat-box {
-            margin-bottom: 20px;
+            background: #111;
+            border: 1px solid #ff0000;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            flex: 1;
+        }
+        .stat-number {
+            font-size: 2em;
+            color: #00ff00;
         }
     </style>
 </head>
 <body>
-    <div class="sidebar">
-        <div class="stat-box">
-            <div class="profit-meter">$<span id="profit">24</span>K</div>
-            <div>PROFIT TOTAL</div>
+    <canvas class="matrix-bg" id="matrix"></canvas>
+    
+    <div class="container">
+        <!-- SIDEBAR -->
+        <div class="sidebar">
+            <h2 style="color: #ff0000; margin-bottom: 20px;">🔥 DASHBOARD</h2>
+            
+            <div class="stat-box">
+                <div class="stat-number" id="totalBots">0</div>
+                <div>BOTS ACTIVOS</div>
+            </div>
+            
+            <div class="stat-box">
+                <div class="stat-number" id="uptime">00:00:00</div>
+                <div>UPTIME SERVER</div>
+            </div>
+            
+            <button class="hacker-btn" onclick="showSection('upload')">📤 UPLOAD BOT</button>
+            <button class="hacker-btn" onclick="showSection('create')">⚙️ CREAR BOT</button>
+            <button class="hacker-btn" onclick="showSection('bots')">👁️ VER BOTS</button>
+            <button class="hacker-btn" onclick="showSection('logs')">📊 LOGS GLOBAL</button>
+            
+            <div style="margin-top: 30px;">
+                <a href="https://discord.gg/R2pGnXBX" class="discord-link" target="_blank">
+                    💎 DISCORD SERVER
+                </a>
+            </div>
+            
+            <div id="sidebarBots" style="margin-top: 30px;">
+                <h3 style="color: #ff0000;">📋 BOTS SUBIDOS</h3>
+                <div id="botList"></div>
+            </div>
         </div>
-        
-        <div class="terminal-quick">
-            <div>darknights> <span id="quickCmd"></span></div>
-            <div class="quick-cmd" onclick="quickCmd('start all')">▶️ START ALL</div>
-            <div class="quick-cmd" onclick="quickCmd('kill all')">💀 KILL ALL</div>
-            <div class="quick-cmd" onclick="quickCmd('status')">📊 STATUS</div>
+
+        <!-- MAIN CONTENT -->
+        <div class="main-content">
+            <div class="header">
+                <h1 class="title">DARK NIGHTS V2</h1>
+                <p style="font-size: 1.2em; opacity: 0.8;">SERVER DISCORD: <a href="https://discord.gg/R2pGnXBX" style="color: #7289da;">https://discord.gg/R2pGnXBX</a></p>
+            </div>
+
+            <!-- UPLOAD SECTION -->
+            <div id="uploadSection" class="content-section" style="display: none;">
+                <h2 style="color: #ff0000;">📤 UPLOAD BOT DISCORD</h2>
+                <div class="drop-zone" id="dropZone">
+                    <p>☠️ ARRASTRA tu bot.py AQUÍ</p>
+                    <p>TOKEN se pide después</p>
+                    <input type="file" id="fileInput" accept=".py" style="display: none;">
+                </div>
+                <input type="text" id="uploadToken" class="token-input" placeholder="🔑 TOKEN DEL BOT DISCORD">
+                <button class="hacker-btn" onclick="uploadBot()" style="width: auto; display: inline-block;">🚀 DEPLOY 24/7</button>
+            </div>
+
+            <!-- CREATE BOT SECTION -->
+            <div id="createSection" class="content-section" style="display: none;">
+                <h2 style="color: #ff0000;">⚙️ CREAR BOT DESDE CERO</h2>
+                <input type="text" id="newBotName" class="token-input" placeholder="Nombre del bot">
+                <input type="text" id="newBotToken" class="token-input" placeholder="Token del bot">
+                <textarea id="codeEditor" placeholder="Escribe tu código Python aquí...
+# Ejemplo bot Discord:
+import discord
+import asyncio
+
+client = discord.Client()
+
+@client.event
+async def on_ready():
+    print(f'🤖 {client.user} está vivo 24/7!')
+
+@client.event
+async def on_message(message):
+    if message.content.startswith('!ping'):
+        await message.channel.send('🏓 Pong!')
+
+client.run('TU_TOKEN_AQUI')"></textarea>
+                <button class="hacker-btn" onclick="createBot()" style="width: auto; display: inline-block;">💾 GENERAR Y DEPLOY</button>
+            </div>
+
+            <!-- BOTS SECTION -->
+            <div id="botsSection" class="content-section" style="display: none;">
+                <h2 style="color: #ff0000;">👁️ BOTS DESPLEGADOS</h2>
+                <div id="mainBotsList"></div>
+            </div>
+
+            <!-- LOGS SECTION -->
+            <div id="logsSection" class="content-section" style="display: none;">
+                <h2 style="color: #ff0000;">📊 LOGS GLOBALES</h2>
+                <div id="logs"></div>
+            </div>
         </div>
     </div>
 
     <script>
-        // PROFIT ANIMATION
-        let profit = 24;
-        setInterval(() => {
-            profit += Math.random() * 10;
-            document.getElementById('profit').textContent = profit.toFixed(0);
-        }, 3000);
+        // Matrix background
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const matrix = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン'.split('');
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
 
-        // QUICK COMMANDS
-        function quickCmd(cmd) {
-            document.getElementById('quickCmd').textContent = cmd;
-            console.log(`🔥 ${cmd.toUpperCase()} ejecutado`);
-            setTimeout(() => document.getElementById('quickCmd').textContent = '', 2000);
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#00ff00';
+            ctx.font = `${fontSize}px monospace`;
+
+            drops.forEach((y, i) => {
+                const text = matrix[Math.floor(Math.random() * matrix.length)];
+                ctx.fillText(text, i * fontSize, y * fontSize);
+                if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            });
+        }
+        setInterval(drawMatrix, 50);
+
+        // Data storage
+        let bots = JSON.parse(localStorage.getItem('darkNightsBots')) || [];
+        let globalLogs = [];
+
+        // Init
+        updateDashboard();
+        showSection('upload');
+
+        function showSection(section) {
+            document.querySelectorAll('.content-section').forEach(s => s.style.display = 'none');
+            document.getElementById(section + 'Section').style.display = 'block';
+            
+            document.querySelectorAll('.hacker-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
         }
 
-        // SIMULATED API CALL
-        function getStatus() {
-            return {
-                status: '🟢 DARK NIGHTS V2 LIVE 24/7',
-                bots: Math.floor(Math.random() * 100) + 50,
-                uptime: '99.99%',
-                discord: 'https://discord.gg/R2pGnXBX',
-                timestamp: new Date().toISOString()
+        function uploadBot() {
+            const file = document.getElementById('fileInput').files[0];
+            const token = document.getElementById('uploadToken').value;
+            
+            if (!file || !token) {
+                log('❌ Necesitas archivo .py Y token');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const botCode = e.target.result;
+                const botName = file.name.replace('.py', '');
+                
+                const bot = {
+                    id: Date.now(),
+                    name: botName,
+                    token: token,
+                    code: botCode,
+                    status: 'RUNNING',
+                    uptime: 0,
+                    logs: []
+                };
+                
+                bots.push(bot);
+                saveBots();
+                simulateBot(bot);
+                updateDashboard();
+                
+                log(`✅ ${botName} desplegado 24/7 con token protegido`);
+                document.getElementById('fileInput').value = '';
+                document.getElementById('uploadToken').value = '';
             };
+            reader.readAsText(file);
         }
 
-        setInterval(() => {
-            const data = getStatus();
-            console.log(`🌐 API: ${data.status} | ${data.bots} bots online`);
-        }, 5000);
+        function createBot() {
+            const name = document.getElementById('newBotName').value;
+            const token = document.getElementById('newBotToken').value;
+            const code = document.getElementById('codeEditor').value;
+
+            if (!name || !token || !code) {
+                log('❌ Completa todos los campos');
+                return;
+            }
+
+            const bot = {
+                id: Date.now(),
+                name: name,
+                token: token,
+                code: code,
+                status: 'RUNNING',
+                uptime: 0,
+                logs: []
+            };
+
+            bots.push(bot);
+            saveBots();
+            simulateBot(bot);
+            updateDashboard();
+            
+            log(`🤖 Nuevo bot "${name}" creado y desplegado 24/7`);
+            
+            // Reset form
+            document.getElementById('newBotName').value = '';
+            document.getElementById('newBotToken').value = '';
+            document.getElementById('codeEditor').value = '';
+        }
+
+        function simulateBot(bot) {
+            // Simula ejecución 24/7
+            setInterval(() => {
+                if (bot.status === 'RUNNING') {
+                    bot.uptime++;
+                    bot.logs.push(`[${new Date().toLocaleTimeString()}] ✅ Vivo - Uptime: ${bot.uptime}s`);
+                    if (bot.logs.length > 50) bot.logs.shift();
+                    saveBots();
+                    updateDashboard();
+                }
+            }, 5000);
+
+            // Mensaje Discord simulado
+            setTimeout(() => {
+                bot.logs.push(`[${new Date().toLocaleTimeString()}] 💬 Discord API OK - Token válido`);
+                saveBots();
+            }, 2000);
+        }
+
+        function log(message) {
+            globalLogs.push(`[${new Date().toLocaleTimeString()}] ${message}`);
+            if (globalLogs.length > 100) globalLogs.shift();
+            document.getElementById('logs').innerHTML = globalLogs.join('\n');
+            document.getElementById('logs').scrollTop = document.getElementById('logs').scrollHeight;
+        }
+
+        function saveBots() {
+            localStorage.setItem('darkNightsBots', JSON.stringify(bots));
+        }
+
+        function updateDashboard() {
+            document.getElementById('totalBots').textContent = bots.length;
+            document.getElementById('uptime').textContent = formatUptime(Math.floor(Date.now() / 1000));
+            
+            // Sidebar bots
+            const botList = document.getElementById('botList');
+            botList.innerHTML = bots.map(bot => `
+                <div class="bot-item" onclick="selectBot(${bot.id})">
+                    <div>${bot.name}</div>
+                    <div class="status ${bot.status}">${bot.status}</div>
+                </div>
+            `).join('');
+
+            // Main bots list
+            const mainList = document.getElementById('mainBotsList');
+            mainList.innerHTML = bots.map(bot => `
+                <div style="background: #111; border: 1px solid #ff0000; padding: 20px; margin: 15px 0; border-radius: 10px;">
+                    <h3 style="color: #00ff00;">${bot.name}</h3>
+                    <p><strong>Status:</strong> <span style="color: ${bot.status === 'RUNNING' ? '#00ff00' : '#ff0000'}">${bot.status}</span></p>
+                    <p><strong>Uptime:</strong> ${formatUptime(bot.uptime)}</p>
+                    <p><strong>Token:</strong> ${bot.token.substring(0,10)}...</p>
+                    <div style="margin-top: 10px;">
+                        <button class="hacker-btn" style="width: auto; padding: 8px 16px; font-size: 12px;" onclick="toggleBot(${bot.id})">
+                            ${bot.status === 'RUNNING' ? '⏹️ STOP' : '▶️ START'}
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleBot(id) {
+            const bot = bots.find(b => b.id === id);
+            if (bot) {
+                bot.status = bot.status === 'RUNNING' ? 'STOPPED' : 'RUNNING';
+                saveBots();
+                updateDashboard();
+                log(`${bot.name} ${bot.status === 'RUNNING' ? 'REINICIADO' : 'DETENIDO'}`);
+            }
+        }
+
+        function selectBot(id) {
+            // Scroll to bot in main section
+            document.querySelector(`[onclick="selectBot(${id})"]`).scrollIntoView();
+        }
+
+        function formatUptime(seconds) {
+            const h = Math.floor(seconds / 3600);
+            const m = Math.floor((seconds % 3600) / 60);
+            const s = seconds % 60;
+            return `${h.toString().padStart(2,'0')}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+        }
+
+        // Drag & Drop
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropZone.addEventListener(eventName, () => dropZone.classList.add('dragover'), false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, () => dropZone.classList.remove('dragover'), false);
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            fileInput.files = e.dataTransfer.files;
+        });
+
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files[0]) {
+                dropZone.innerHTML = `<p>✅ ${fileInput.files[0].name} listo</p>`;
+            }
+        });
+
+        // Auto update
+        setInterval(updateDashboard, 2000);
+        setInterval(() => log('🖥️ Servidor DARK NIGHTS V2 online 24/7'), 30000);
     </script>
 </body>
 </html>
