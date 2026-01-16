@@ -14,6 +14,7 @@
             font-family: 'Courier New', monospace;
             overflow-x: hidden;
         }
+        /* Profit Meter */
         .profit-meter {
             font-size: 3em;
             color: #ffd700;
@@ -24,6 +25,7 @@
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.1); }
         }
+        /* Quick Terminal */
         .terminal-quick {
             background: #111;
             border: 2px solid #ff0000;
@@ -47,6 +49,13 @@
             color: #000;
             box-shadow: 0 0 20px #ff0000;
         }
+        /* Sidebar */
+        .sidebar {
+            padding: 20px;
+        }
+        .stat-box {
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
@@ -65,19 +74,21 @@
     </div>
 
     <script>
+        // PROFIT ANIMATION
         let profit = 24;
         setInterval(() => {
             profit += Math.random() * 10;
             document.getElementById('profit').textContent = profit.toFixed(0);
         }, 3000);
 
+        // QUICK COMMANDS
         function quickCmd(cmd) {
             document.getElementById('quickCmd').textContent = cmd;
             console.log(`🔥 ${cmd.toUpperCase()} ejecutado`);
             setTimeout(() => document.getElementById('quickCmd').textContent = '', 2000);
         }
 
-        // Simulando API local en el mismo HTML
+        // SIMULATED API CALL
         function getStatus() {
             return {
                 status: '🟢 DARK NIGHTS V2 LIVE 24/7',
